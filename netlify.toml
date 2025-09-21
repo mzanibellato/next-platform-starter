@@ -1,3 +1,23 @@
 [build]
   publish = ".next"
   command = "npm run build"
+
+[[plugins]]
+  package = "@netlify/plugin-csp-nonce"
+  [plugins.inputs]
+    reportOnly = false
+    excludedPath = ["/api/*"]  # escludi API se serve
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'none'; script-src 'self' 'nonce-{nonce}'; style-src 'self' 'nonce-{nonce}' https://cdnjs.cloudflare.com; img-src 'self' https://ioninteractive.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://api.example.com https://cdnjs.cloudflare.com; frame-src 'none'; worker-src 'self';"
+
+
+## Rewrite image URLs marked with imgcdn=true to use Netlify Image CDN
+[[redirects]]
+  from = "/*"
+  query = {imgcdn = "true"}
+  to = "/.netlify/images?url=/:splat&fm=webp"
+  status = 200
+  force = true

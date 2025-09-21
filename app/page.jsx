@@ -34,12 +34,55 @@ export default function Page() {
                     Read the Docs
                 </Link>
             </section>
+
+            {/* Sezione immagini: immagine permessa e immagine bloccata */}
+            <section className="flex flex-col gap-6">
+                <h2>Test immagini con CSP</h2>
+                <p>Immagine permessa (da dominio CSP consentito):</p>
+                <img 
+                  src="https://ioninteractive.com/ionacademy/wp-content/uploads/2023/12/ion_academy-How_to_create_a_test_url.png" 
+                  alt="Immagine permessa" 
+                  style={{ maxWidth: '300px' }} 
+                />
+                <p>Immagine bloccata (da dominio non consentito):</p>
+                <img 
+                  src="https://iteratorstesting.com/images/_mediumSize/testLink-logo.png" 
+                  alt="Immagine bloccata" 
+                  style={{ maxWidth: '300px' }} 
+                />
+            </section>
+
+            {/* Sezione script: script inline autorizzato e script inline bloccato */}
+            <section className="flex flex-col gap-6">
+                <h2>Test script inline con CSP nonce</h2>
+
+                {/* Script autorizzato con nonce */}
+                <script 
+                    nonce={process.env.NEXT_PUBLIC_CSP_NONCE /* o altro modo di passare nonce */}
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            console.log('Script inline autorizzato eseguito');
+                            document.body.style.backgroundColor = '#d0f0c0'; // prova visiva
+                        `
+                    }} 
+                />
+
+                {/* Script bloccato senza nonce */}
+                <script dangerouslySetInnerHTML={{
+                    __html: `
+                        console.log('Questo script inline senza nonce sarà bloccato');
+                        alert('Alert che non dovrebbe apparire perché blocca CSP');
+                    `
+                }} />
+            </section>
+
             {!!ctx && (
                 <section className="flex flex-col gap-4">
                     <Markdown content={contextExplainer} />
                     <RuntimeContextCard />
                 </section>
             )}
+
             <section className="flex flex-col gap-4">
                 <Markdown content={preDynamicContentExplainer} />
                 <RandomQuote />
