@@ -8,7 +8,7 @@ export function middleware(request) {
 
 const csp = `
   default-src 'none';
-  script-src 'self' 'nonce-${nonce}';
+  script-src 'self' 'nonce-${nonce}' 'unsafe-inline';
   style-src 'self' 'nonce-${nonce}' https://cdnjs.cloudflare.com https://fonts.googleapis.com;
   img-src 'self' https://ioninteractive.com https://cdnjs.cloudflare.com;
   font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://r2cdn.perplexity.ai;
