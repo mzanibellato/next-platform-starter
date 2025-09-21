@@ -3,10 +3,9 @@ import { NextResponse } from 'next/server';
 export function middleware(request) {
   const response = NextResponse.next();
 
-  // Genera nonce dinamico
+  // Genera nonce casuale
   const nonce = Math.random().toString(36).substring(2, 15);
 
-  // Imposta policy CSP per pagine dinamiche
   const csp = `
     default-src 'none';
     script-src 'self' 'nonce-${nonce}';
@@ -19,7 +18,6 @@ export function middleware(request) {
   `.replace(/\s+/g, ' ').trim();
 
   response.headers.set('Content-Security-Policy', csp);
-  // Header custom per passare nonce a client React
   response.headers.set('x-csp-nonce', nonce);
 
   return response;

@@ -47,7 +47,6 @@ export default function Page() {
         </Link>
       </section>
 
-      {/* Sezione immagini: immagine permessa e immagine bloccata */}
       <section className="flex flex-col gap-6">
         <h2>Test immagini con CSP</h2>
         <p>Immagine permessa (da dominio CSP consentito):</p>
@@ -64,7 +63,6 @@ export default function Page() {
         />
       </section>
 
-      {/* Sezione script: script inline autorizzato e script inline bloccato */}
       <section className="flex flex-col gap-6">
         <h2>Test script inline con CSP nonce</h2>
 
@@ -74,7 +72,7 @@ export default function Page() {
             dangerouslySetInnerHTML={{
               __html: `
                 console.log('Script inline autorizzato eseguito');
-                document.body.style.backgroundColor = '#d0f0c0'; // prova visiva
+                document.body.style.backgroundColor = '#d0f0c0';
               `,
             }}
           />
@@ -108,6 +106,7 @@ export default function Page() {
 
 function RuntimeContextCard() {
   const title = `Netlify Context: running in ${ctx} mode.`;
+
   if (ctx === 'dev') {
     return (
       <Card title={title}>
