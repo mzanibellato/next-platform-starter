@@ -31,10 +31,8 @@ export default function Page() {
 
   useEffect(() => {
     fetch(window.location.href, { method: 'HEAD' })
-      .then(response => {
-        const cspNonce = response.headers.get('x-csp-nonce');
-        if (cspNonce) setNonce(cspNonce);
-      })
+      .then(res => res.headers.get('x-csp-nonce'))
+      .then(setNonce)
       .catch(() => setNonce(null));
   }, []);
 
