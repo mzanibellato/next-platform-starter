@@ -7,14 +7,14 @@ export const metadata = {
     }
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, nonce  }) {
     return (
         <html lang="en">
             <head>
                 <link rel="icon" href="/favicon.svg" sizes="any" />
             </head>
             <body className="antialiased text-white bg-blue-900">
-                {children}
+                {children} {nonce}
             </body>
         </html>
     );
