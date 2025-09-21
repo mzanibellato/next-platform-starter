@@ -49,14 +49,6 @@ export default function SimpleCspTestPage() {
         ) : (
           <p>Attendi nonce...</p>
         )}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              console.log("Script inline senza nonce bloccato");
-              alert("Questo alert non dovrebbe apparire");
-            `,
-          }}
-        />
       </section>
     </div>
   );
