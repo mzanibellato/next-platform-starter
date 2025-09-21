@@ -11,7 +11,7 @@ export function middleware(request) {
     script-src 'self' 'nonce-${nonce}';
     style-src 'self' 'nonce-${nonce}' https://cdnjs.cloudflare.com;
     img-src 'self' https://ioninteractive.com https://cdnjs.cloudflare.com;
-    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://fonts.googleapis.com;
     connect-src 'self' https://api.example.com https://cdnjs.cloudflare.com;
     frame-src 'none';
     worker-src 'self';
